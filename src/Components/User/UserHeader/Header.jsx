@@ -6,7 +6,7 @@ function Header() {
       <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary ">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-          DMYTHRA
+          <b>DMYTHRA</b>
           </a>
           <button
             class="navbar-toggler"

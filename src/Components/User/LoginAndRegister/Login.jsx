@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { userSignup } from "../../../Services/userApi";
+import { toast } from "react-toastify";
 
 function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -22,8 +24,20 @@ function Login() {
     password: "",
   };
 
-  const signOnSubmit = (values) => {};
-  const loginOnSubmit = (values) => {};
+  const signOnSubmit = async(values) => {
+    console.log(values,"SIGN UP values")
+    const {data}=await userSignup(values)
+    console.log(data);
+    if(data.status){
+
+      toast.success(data.message)
+    }else{
+      toast.error(data.message)
+    }
+  };
+  const loginOnSubmit = (values) => {
+    console.log(values,"LOG IN values")
+  };
 
   const validationSchemaOfLogin = Yup.object({
     email: Yup.string()
@@ -80,7 +94,7 @@ function Login() {
       <br />
       <div className={`cont ${isSignUp ? "s--signup" : ""}`}>
         <div className="form sign-in">
-          <h2 className="my-3">Welcome to Dmythra</h2>
+          <h2 className="my-3">Welcome to <b>Dmythra</b></h2>
           <div className="loginForm">
             <form onSubmit={formik.handleSubmit}>
               <label>
@@ -120,7 +134,7 @@ function Login() {
                   </p>
                 ) : null}
               </label>
-              <button type="submit" className="submit">
+              <button type="submit" className="submit buttonCls">
                 Log In
               </button>
             </form>
@@ -231,7 +245,7 @@ function Login() {
                   </p>
                 ) : null}
               </label>
-              <button type="submit" className="submit">
+              <button type="submit" className="submit buttonCls">
                 Sign Up
               </button>
             </form>

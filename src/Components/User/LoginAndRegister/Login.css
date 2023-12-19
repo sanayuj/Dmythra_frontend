@@ -48,7 +48,7 @@ button {
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
     padding: 50px 30px 0;
 }
-
+/* doubt */
 .sub-cont {
     overflow: hidden;
     position: absolute;
@@ -69,7 +69,7 @@ button {
     transform: translate3d(-640px, 0, 0);
 }
 
-button {
+.buttonCls {
     display: block;
     margin: 0 auto;
     width: 260px;
@@ -98,7 +98,7 @@ button {
     top: 0;
     width: 900px;
     height: 100%;
-    /* background-image: url("ext.jpg"); */
+    background-image: url("https://static.toiimg.com/photo/msid-60320551,width-96,height-65.cms");
     opacity: .8;
     background-size: cover;
     -webkit-transition: -webkit-transform 1.2s ease-in-out;
