@@ -4,8 +4,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userSignup,login } from "../../../Services/userApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate=useNavigate()
   const [isSignUp, setIsSignUp] = useState(false);
 
   const toggleSignUp = () => {
@@ -29,6 +31,7 @@ function Login() {
     console.log(data);
     if(data.status){
       toast.success(data.message)
+      navigate("/login")
     }else{
       toast.error(data.message)
     }
@@ -40,6 +43,7 @@ function Login() {
     console.log(data);
     if(data.status){
       toast.success(data.message)
+      navigate("/")
     }else{
       toast.error(data.message)
     }
