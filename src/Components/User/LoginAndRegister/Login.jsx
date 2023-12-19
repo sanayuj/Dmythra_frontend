@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { userSignup } from "../../../Services/userApi";
+import { userSignup,login } from "../../../Services/userApi";
 import { toast } from "react-toastify";
 
 function Login() {
@@ -25,18 +25,24 @@ function Login() {
   };
 
   const signOnSubmit = async(values) => {
-    console.log(values,"SIGN UP values")
     const {data}=await userSignup(values)
     console.log(data);
     if(data.status){
-
       toast.success(data.message)
     }else{
       toast.error(data.message)
     }
   };
-  const loginOnSubmit = (values) => {
+
+  const loginOnSubmit = async(values) => {
     console.log(values,"LOG IN values")
+    const {data}=await login(values)
+    console.log(data);
+    if(data.status){
+      toast.success(data.message)
+    }else{
+      toast.error(data.message)
+    }
   };
 
   const validationSchemaOfLogin = Yup.object({
