@@ -5,8 +5,11 @@ import * as Yup from "yup";
 import { userSignup,login } from "../../../Services/userApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../../Features/setUser";
 
 function Login() {
+  const dispatch=useDispatch()
   const navigate=useNavigate()
   const [isSignUp, setIsSignUp] = useState(false);
 
@@ -40,9 +43,11 @@ function Login() {
   const loginOnSubmit = async(values) => {
     console.log(values,"LOG IN values")
     const {data}=await login(values)
-    console.log(data);
+    console.log(data,"DISPATCH VALUES");
     if(data.status){
+      localStorage.setItem("jwt", data.token);
       toast.success(data.message)
+      dispatch(setUserDetails(data.userDetails))
       navigate("/")
     }else{
       toast.error(data.message)
