@@ -18,10 +18,10 @@ userInstance.interceptors.request.use((request)=>{
   request.headers.Authorization=`Bearer ${token}`
   return request
 })
-// adminInstance.interceptors.request.use((request)=>{
-//   const token=localStorage.getItem("adminJWT")
-//   request.headers.Authorization=`Bearer ${token}`
-//   return request
-// })
+adminInstance.interceptors.request.use((request)=>{
+  const token=localStorage.getItem("adminJWT")
+  request.headers.Authorization=`Bearer ${token}`
+  return request
+})
 
 export {userInstance,adminInstance}

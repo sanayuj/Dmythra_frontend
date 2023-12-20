@@ -24,10 +24,10 @@ function Login() {
       });
       const onSubmit = async (values) => {
         try {
-         console.log(values,"___")
          const {data}=await adminLogin(values)
          console.log(data);
          if(data.status){
+          localStorage.setItem("adminJWT", data.token);
             toast.success(data.message)
             navigate("/admin/home")
          }else{

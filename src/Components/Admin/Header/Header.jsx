@@ -1,6 +1,12 @@
 import React from 'react'
 import "./Header.css"
+import { useNavigate } from 'react-router-dom'
 function Header() {
+  const navigate=useNavigate()
+  const handleAdminLogout=()=>{
+   localStorage.removeItem("adminJWT")
+   navigate("/admin/")
+  }
   return (
     <div><nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -21,7 +27,7 @@ function Header() {
         </ul> */}
       </div>
     </div>
-    <div className='LogoutBtn'>Logout</div>
+    <div className='LogoutBtn' ><button onClick={handleAdminLogout}>Logout</button></div>
   </nav>
   
   </div>
