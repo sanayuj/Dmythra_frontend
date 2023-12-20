@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setUserDetails } from "../../../Features/setUser";
+import { userHeader } from "../../../Services/userApi";
 function Header() {
+  const user = useSelector((state) => state.user.value);
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const handleLogout=()=>{
+    localStorage.removeItem("jwt")
+    dispatch(setUserDetails(""));
+    navigate("/login");
+  }
+  useEffect(()=>{
+    userHeader().then((response)=>{
+      dispatch(setUserDetails(response.data.userDetails));
+    })
+  },[])
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark bg-body-tertiary ">
         <div className="container-fluid">
-        <Link to={"/"} className="linkDecoration"><b>DMYTHRA</b></Link>
-          
-       
+          <Link to={"/"} className="linkDecoration">
+            <b>DMYTHRA</b>
+          </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -23,7 +40,11 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active mx-3" aria-current="page" href="#">
+                <a
+                  className="nav-link active mx-3"
+                  aria-current="page"
+                  href="#"
+                >
                   About
                 </a>
               </li>
@@ -45,9 +66,20 @@ function Header() {
             </ul>
           </div>
         </div>
-        <div className="logoutBtn"><Link className="linkDecoration" to={"/login"}>Login</Link></div>
+        {user ? (
+          <div className="logoutBtn" onClick={handleLogout}>
+            <Link className="linkDecoration text-white" >
+              LogOut 
+            </Link>
+          </div>
+        ) : (
+          <div className="logIn">
+            <Link className="linkDecoration text-white" to={"/login"}>
+              Login/Signup
+            </Link>
+          </div>
+        )}
       </nav>
-      
     </div>
   );
 }

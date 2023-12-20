@@ -10,3 +10,9 @@ export const userSignup = (values) => {
 export const login=(values)=>{
   return userInstance.post("/login",{...values})
 }
+
+//GET METHODS
+
+export const userHeader=()=>{
+  return userInstance.get("/")
+}

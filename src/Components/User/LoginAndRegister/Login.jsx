@@ -41,9 +41,7 @@ function Login() {
   };
 
   const loginOnSubmit = async(values) => {
-    console.log(values,"LOG IN values")
     const {data}=await login(values)
-    console.log(data,"DISPATCH VALUES");
     if(data.status){
       localStorage.setItem("jwt", data.token);
       toast.success(data.message)

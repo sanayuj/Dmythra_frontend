@@ -4,8 +4,19 @@
 
 .logoutBtn{
     margin-right: 20px;
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+    
 }
 .linkDecoration{
     text-decoration: none;
     color: black;
+}
+.logIn{
+    margin-right: 20px;
+    background-color: indigo;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
 }
