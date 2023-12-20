@@ -5,3 +5,7 @@
 .logoutBtn{
     margin-right: 20px;
 }
+.linkDecoration{
+    text-decoration: none;
+    color: black;
+}

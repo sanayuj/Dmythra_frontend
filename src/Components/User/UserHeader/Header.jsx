@@ -1,12 +1,13 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 function Header() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark bg-body-tertiary ">
         <div className="container-fluid">
-        
-          <b>DMYTHRA</b>
+        <Link to={"/"} className="linkDecoration"><b>DMYTHRA</b></Link>
+          
        
           <button
             className="navbar-toggler"
@@ -44,7 +45,7 @@ function Header() {
             </ul>
           </div>
         </div>
-        <div className="logoutBtn">Logout</div>
+        <div className="logoutBtn"><Link className="linkDecoration" to={"/login"}>Login</Link></div>
       </nav>
       
     </div>

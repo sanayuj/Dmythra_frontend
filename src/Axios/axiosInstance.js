@@ -13,4 +13,15 @@ const adminInstance = axios.create({
   },
 });
 
+userInstance.interceptors.request.use((request)=>{
+  const token=localStorage.getItem("jwt")
+  request.headers.Authorization=`Bearer ${token}`
+  return request
+})
+// adminInstance.interceptors.request.use((request)=>{
+//   const token=localStorage.getItem("adminJWT")
+//   request.headers.Authorization=`Bearer ${token}`
+//   return request
+// })
+
 export {userInstance,adminInstance}
