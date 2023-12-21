@@ -39,7 +39,7 @@ function SideBar() {
             <NavIcon></NavIcon>
             <NavText>Training Video</NavText>
           </NavItem>
-          <NavItem eventKey="/admin/home">
+          <NavItem eventKey="/admin/academic">
             <NavIcon></NavIcon>
             <NavText>Academic Class</NavText>
           </NavItem>
