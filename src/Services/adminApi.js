@@ -8,6 +8,10 @@ export const toogleBlock=(userId)=>{
     return adminInstance.post('/blockuser',{userId})
 }
 
+export const uploadTrainingDetails=(values)=>{
+    return adminInstance.post('/addtraining',{...values})
+}
+
 
 
 //GET

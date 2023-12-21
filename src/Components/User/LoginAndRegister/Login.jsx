@@ -30,7 +30,6 @@ function Login() {
   };
 
   const signOnSubmit = async(values,{ resetForm }) => {
-    console.log(values,"1212121212");
     const {data}=await userSignup(values)
     if(data.status){
       toast.success(data.message)
@@ -44,7 +43,6 @@ function Login() {
   };
 
   const loginOnSubmit = async(values) => {
-    console.log(values,"LOGin Vlaues");
     const {data}=await login(values)
     if(data.success){
       localStorage.setItem("jwt", data.token);

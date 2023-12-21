@@ -2,25 +2,34 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import "./Training.css";
+import { uploadTrainingDetails } from "../../../Services/adminApi";
+import { toast } from "react-toastify";
 function Training() {
   const initialValues = {
     videoName: "",
     videoDescription: "",
     videoLink: "",
   };
-  const onSubmit = (values) => {
+  const onSubmit = async(values,{resetForm}) => {
     console.log(values,"****");
+    const {data}=await uploadTrainingDetails(values)
+    if(data.status){
+        toast.success(data.message)
+        resetForm({
+            values: initialValues,
+          });
+    }else{
+        toast.error(data.message)
+    }
 
   };
 
   const validationSchema = Yup.object({
     videoName: Yup.string()
       .min(6, "*Name must be at least 6 characters long")
-      .matches(/^[A-Za-z]+$/, "* Name must only contain characters")
       .required("* This field is required"),
     videoDescription: Yup.string()
       .min(8, "*Name must be at least 8 characters long")
-      .matches(/^[A-Za-z]+$/, "* Name must only contain characters")
       .required("* This field is required"),
     videoLink: Yup.string()
       .required("YouTube link is required")
