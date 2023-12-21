@@ -24,8 +24,9 @@ function Login() {
       });
       const onSubmit = async (values) => {
         try {
+          console.log(values,"555");
          const {data}=await adminLogin(values)
-         console.log(data);
+         console.log(data,"______******");
          if(data.status){
           localStorage.setItem("adminJWT", data.token);
             toast.success(data.message)

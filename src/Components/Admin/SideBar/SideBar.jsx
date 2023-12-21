@@ -18,26 +18,13 @@ function SideBar() {
     >
       <SideNav.Toggle className="toggle" />
       <SideNav.Nav defaultSelected="DashBoard">
-        <NavItem eventKey="/admin/">
-          <NavIcon>
-            <AiFillPieChart size={20} className="sidebarIcon" />
-          </NavIcon>
-          <NavText>Home</NavText>
-          <NavItem eventKey="/admin/">
-            <NavIcon></NavIcon>
-            <NavText>Sale chart</NavText>
-          </NavItem>
-          <NavItem eventKey="/admin/bookingHistroy">
-            <NavIcon></NavIcon>
-            <NavText>Booking Histroy</NavText>
-          </NavItem>
-        </NavItem>
+   
         <NavItem eventKey="/">
           <NavIcon>
             <HiUsers size={20} className="sidebarIcon" />
           </NavIcon>
           <NavText>Students</NavText>
-          <NavItem eventKey="/admin/listuser">
+          <NavItem eventKey="/admin/home">
             <NavIcon></NavIcon>
             <NavText>Users List</NavText>
           </NavItem>
@@ -47,17 +34,17 @@ function SideBar() {
           <NavIcon>
             <AiFillFilePpt size={20} className="sidebarIcon" />
           </NavIcon>
-          <NavText>All Course</NavText>
-          <NavItem eventKey="/admin/listCourse">
+          <NavText>Uplaod</NavText>
+          <NavItem eventKey="/admin/training">
             <NavIcon></NavIcon>
-            <NavText>List Course</NavText>
+            <NavText>Training Video</NavText>
           </NavItem>
-          <NavItem eventKey="/admin/addcourse">
+          <NavItem eventKey="/admin/home">
             <NavIcon></NavIcon>
-            <NavText>Add Course</NavText>
+            <NavText>Academic Class</NavText>
           </NavItem>
         </NavItem>
-        <NavItem eventKey="/admin/addcategory">
+        <NavItem eventKey="/admin/home">
           <NavIcon>
             <BiCategory size={20} className="sidebarIcon" />
           </NavIcon>

@@ -25,15 +25,18 @@ function Login() {
   };
 
   const initialValuesOfLogin = {
-    email: "",
-    password: "",
+    emailId: "",
+    loginPassword: "",
   };
 
-  const signOnSubmit = async(values) => {
+  const signOnSubmit = async(values,{ resetForm }) => {
+    console.log(values,"1212121212");
     const {data}=await userSignup(values)
-    console.log(data);
     if(data.status){
       toast.success(data.message)
+      resetForm({
+        values: initialValuesOfSignup,
+      });
       navigate("/login")
     }else{
       toast.error(data.message)
@@ -41,8 +44,9 @@ function Login() {
   };
 
   const loginOnSubmit = async(values) => {
+    console.log(values,"LOGin Vlaues");
     const {data}=await login(values)
-    if(data.status){
+    if(data.success){
       localStorage.setItem("jwt", data.token);
       toast.success(data.message)
       dispatch(setUserDetails(data.userDetails))
@@ -53,14 +57,14 @@ function Login() {
   };
 
   const validationSchemaOfLogin = Yup.object({
-    email: Yup.string()
+    emailId: Yup.string()
       .email("* Invaild email format")
       .required("* This field is required")
       .matches(
         /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
         "* Invalid email address"
       ),
-    password: Yup.string().required("* This field is required"),
+      loginPassword: Yup.string().required("* This field is required"),
   });
 
   const validationSchemaOfSignup = Yup.object({
@@ -93,12 +97,16 @@ function Login() {
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("* This field is required"),
   });
-  const formik = useFormik({
-    initialValues: isSignUp ? initialValuesOfSignup : initialValuesOfLogin,
-    onSubmit: isSignUp ? signOnSubmit : loginOnSubmit,
-    validationSchema: isSignUp
-      ? validationSchemaOfSignup
-      : validationSchemaOfLogin,
+  const formikLogin = useFormik({
+    initialValues: initialValuesOfLogin,
+    onSubmit: loginOnSubmit,  // Use the loginOnSubmit function for login form
+    validationSchema: validationSchemaOfLogin,
+  });
+  
+  const formikSignup = useFormik({
+    initialValues: initialValuesOfSignup,
+    onSubmit: signOnSubmit,  // Use the signOnSubmit function for signup form
+    validationSchema: validationSchemaOfSignup,
   });
 
   return (
@@ -109,23 +117,23 @@ function Login() {
         <div className="form sign-in">
           <h2 className="my-3">Welcome to <b>Dmythra</b></h2>
           <div className="loginForm">
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formikLogin.handleSubmit}>
               <label>
                 <span>Email</span>
                 <input
                   className="loginInput"
                   type="email"
-                  name="email"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
+                  name="emailId"
+                  onBlur={formikLogin.handleBlur}
+                  onChange={formikLogin.handleChange}
+                  value={formikLogin.values.emailId}
                 />
-                {formik.touched.email && formik.errors.email ? (
+                {formikLogin.touched.emailId && formikLogin.errors.emailId ? (
                   <p
                     className="text-danger"
                     style={{ fontSize: "12px", margin: "0px" }}
                   >
-                    {formik.errors.email}
+                    {formikLogin.errors.emailId}
                   </p>
                 ) : null}
               </label>
@@ -134,16 +142,17 @@ function Login() {
                 <input
                   className="loginInput"
                   type="password"
-                  name="password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
+                  name="loginPassword"
+                  onBlur={formikLogin.handleBlur}
+                  onChange={formikLogin.handleChange}
+                  value={formikLogin.values.loginPassword}
                 />
-                {formik.touched.password && formik.errors.password ? (
+                {formikLogin.touched.loginPassword && formikLogin.errors.loginPassword ? (
                   <p
                     className="text-danger"
                     style={{ fontSize: "12px", margin: "0px" }}
                   >
-                    {formik.errors.password}
+                    {formikLogin.errors.loginPassword}
                   </p>
                 ) : null}
               </label>
@@ -168,17 +177,17 @@ function Login() {
           </div>
           <div className="form sign-up">
             <h2>Create your Account</h2>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formikSignup.handleSubmit}>
               <label>
                 <span>Name</span>
                 <input
                   type="text"
                   name="username"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.username}
+                  onBlur={formikSignup.handleBlur}
+                  onChange={formikSignup.handleChange}
+                  value={formikSignup.values.username}
                 />
-                {formik.touched.username && formik.errors.username ? (
+                {formikSignup.touched.username && formikSignup.errors.username ? (
                   <p
                     className="text-danger"
                     style={{
@@ -187,7 +196,7 @@ function Login() {
                       padding: "0px",
                     }}
                   >
-                    {formik.errors.username}
+                    {formikSignup.errors.username}
                   </p>
                 ) : null}
               </label>
@@ -196,11 +205,11 @@ function Login() {
                 <input
                   type="email"
                   name="email"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
+                  onBlur={formikSignup.handleBlur}
+                  onChange={formikSignup.handleChange}
+                  value={formikSignup.values.email}
                 />
-                {formik.touched.email && formik.errors.email ? (
+                {formikSignup.touched.email && formikSignup.errors.email ? (
                   <p
                     className="text-danger"
                     style={{
@@ -209,7 +218,7 @@ function Login() {
                       padding: "0px",
                     }}
                   >
-                    {formik.errors.email}
+                    {formikSignup.errors.email}
                   </p>
                 ) : null}
               </label>
@@ -218,11 +227,11 @@ function Login() {
                 <input
                   type="password"
                   name="password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
+                  onBlur={formikSignup.handleBlur}
+                  onChange={formikSignup.handleChange}
+                  value={formikSignup.values.password}
                 />
-                {formik.touched.password && formik.errors.password ? (
+                {formikSignup.touched.password && formikSignup.errors.password ? (
                   <p
                     className="text-danger"
                     style={{
@@ -231,7 +240,7 @@ function Login() {
                       padding: "0px",
                     }}
                   >
-                    {formik.errors.password}
+                    {formikSignup.errors.password}
                   </p>
                 ) : null}
               </label>
@@ -240,12 +249,12 @@ function Login() {
                 <input
                   type="password"
                   name="confirmPassword"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.confirmPassword}
+                  onBlur={formikSignup.handleBlur}
+                  onChange={formikSignup.handleChange}
+                  value={formikSignup.values.confirmPassword}
                 />
-                {formik.touched.confirmPassword &&
-                formik.errors.confirmPassword ? (
+                {formikSignup.touched.confirmPassword &&
+                  formikSignup.errors.confirmPassword ? (
                   <p
                     className="text-danger"
                     style={{
@@ -254,7 +263,7 @@ function Login() {
                       padding: "0px",
                     }}
                   >
-                    {formik.errors.confirmPassword}
+                    {formikSignup.errors.confirmPassword}
                   </p>
                 ) : null}
               </label>
