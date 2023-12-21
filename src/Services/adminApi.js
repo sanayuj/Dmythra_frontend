@@ -11,7 +11,9 @@ export const toogleBlock=(userId)=>{
 export const uploadTrainingDetails=(values)=>{
     return adminInstance.post('/addtraining',{...values})
 }
-
+export const uploadAcademicDetails=(values)=>{
+    return adminInstance.post("/addacademic",{...values})
+}
 
 
 //GET

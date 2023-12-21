@@ -11,7 +11,6 @@ function Training() {
     videoLink: "",
   };
   const onSubmit = async(values,{resetForm}) => {
-    console.log(values,"****");
     const {data}=await uploadTrainingDetails(values)
     if(data.status){
         toast.success(data.message)
