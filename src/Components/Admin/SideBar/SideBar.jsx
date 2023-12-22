@@ -43,6 +43,10 @@ function SideBar() {
             <NavIcon></NavIcon>
             <NavText>Academic Class</NavText>
           </NavItem>
+          <NavItem eventKey="/admin/announcement">
+            <NavIcon></NavIcon>
+            <NavText>Announcement</NavText>
+          </NavItem>
         </NavItem>
         <NavItem eventKey="/admin/home">
           <NavIcon>
@@ -57,3 +61,5 @@ function SideBar() {
 }
 
 export default SideBar
+
+// /announcement

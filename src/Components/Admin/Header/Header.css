@@ -6,3 +6,9 @@
 .LogoutBtn{
     margin-right: 15px;
 }
+
+.adminHeader{
+    position: fixed;
+    z-index: 6000;
+    width: 100%;
+}

@@ -93,7 +93,7 @@ function Training() {
                 <label for="phone" className="formbold-form-label">
                   Training Video Description
                 </label>
-                <input
+                <textarea
                   type="text"
                   name="videoDescription"
                   id="phone"

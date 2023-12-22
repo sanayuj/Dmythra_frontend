@@ -15,6 +15,10 @@ export const uploadAcademicDetails=(values)=>{
     return adminInstance.post("/addacademic",{...values})
 }
 
+export const uploadAnnouncement=(values)=>{
+    return adminInstance.post("/addannouncement",{...values})
+}
+
 
 //GET
 

@@ -88,7 +88,7 @@ function Academic() {
                 <label htmlFor="phone" className="formbold-form-label">
                   Academic Video Description
                 </label>
-                <input
+                <textarea
                   type="text"
                   name="videoDescription"
                   id="phone"
