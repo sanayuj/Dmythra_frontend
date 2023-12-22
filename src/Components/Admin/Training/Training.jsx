@@ -9,18 +9,18 @@ function Training() {
     videoName: "",
     videoDescription: "",
     videoLink: "",
-  };
-  const onSubmit = async(values,{resetForm}) => {
-    const {data}=await uploadTrainingDetails(values)
-    if(data.status){
-        toast.success(data.message)
-        resetForm({
-            values: initialValues,
-          });
-    }else{
-        toast.error(data.message)
-    }
 
+  };
+  const onSubmit = async (values, { resetForm }) => {
+    const { data } = await uploadTrainingDetails(values);
+    if (data.status) {
+      toast.success(data.message);
+      resetForm({
+        values: initialValues,
+      });
+    } else {
+      toast.error(data.message);
+    }
   };
 
   const validationSchema = Yup.object({
@@ -42,6 +42,8 @@ function Training() {
       /^(https?:\/\/)?(www\.)?(youtube\.com\/(embed\/|v\/|watch\?v=)|youtu\.be\/)/;
     return youtubeRegex.test(value);
   };
+
+ 
 
   const formik = useFormik({
     initialValues,

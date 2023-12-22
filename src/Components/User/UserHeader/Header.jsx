@@ -49,9 +49,9 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link" href="#">
-                  Gallery
-                </a>
+                <Link className="nav-link" to="/training">
+                  Training
+                </Link>
               </li>
               <li className="nav-item mx-3">
                 <a className="nav-link" href="#">
