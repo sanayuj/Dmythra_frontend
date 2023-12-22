@@ -40,13 +40,13 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a
+                <Link
                   className="nav-link active mx-3"
                   aria-current="page"
-                  href="#"
+                  to="/announcement"
                 >
-                  About
-                </a>
+                  Announcements
+                </Link>
               </li>
               <li className="nav-item mx-3">
                 <a className="nav-link" href="#">

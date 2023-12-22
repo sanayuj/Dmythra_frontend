@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import HomePage from "../Pages/User/HomePage";
 import LoginAndRegisterPage from "../Pages/User/LoginAndRegisterPage";
+import AnnouncementPage from "../Pages/User/AnnouncementPage";
 
 function UserRouters() {
   return (
@@ -11,6 +12,7 @@ function UserRouters() {
       <Routes>
         <Route path="/login" element={<LoginAndRegisterPage/>}/>
         <Route path="/" element={<HomePage />} />
+        <Route path="/announcement" element={<AnnouncementPage/>}/>
       </Routes>
     </div>
   );

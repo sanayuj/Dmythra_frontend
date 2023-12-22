@@ -19,3 +19,6 @@ export const userHeader=()=>{
   return userInstance.get("/")
 }
 
+export const fetchAnnouncement=()=>{
+  return userInstance.get("/fetchannouncement")
+}
