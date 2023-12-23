@@ -22,3 +22,7 @@ export const userHeader=()=>{
 export const fetchAnnouncement=()=>{
   return userInstance.get("/fetchannouncement")
 }
+
+export const fetchTrainingDetails=()=>{
+  return userInstance.get("/fetchtrainingdetails")
+}
