@@ -8,7 +8,9 @@
 }
 
 .adminHeader{
+    top: 0;
     position: fixed;
     z-index: 6000;
     width: 100%;
+
 }

@@ -52,8 +52,20 @@ function SideBar() {
           <NavIcon>
             <BiCategory size={20} className="sidebarIcon" />
           </NavIcon>
-          <NavText>Category</NavText>
+          <NavText>Requests</NavText>
+          <NavItem eventKey="/admin/donationreq">
+            <NavIcon></NavIcon>
+            <NavText>Donation Requests</NavText>
+         
+          </NavItem>
+          <NavItem eventKey="/admin/userspost">
+            <NavIcon></NavIcon>
+            <NavText>User's Post</NavText>
+         
+          </NavItem>
+         
         </NavItem>
+        
       </SideNav.Nav>
     </SideNav>
   </div>

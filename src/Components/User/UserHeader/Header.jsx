@@ -59,9 +59,14 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link" href="#">
-                  Contact
-                </a>
+                <Link className="nav-link" to="/donation">
+                  Request Donation
+                </Link>
+              </li>
+              <li className="nav-item mx-3">
+                <Link className="nav-link" to="/post">
+                  Post
+                </Link>
               </li>
             </ul>
           </div>

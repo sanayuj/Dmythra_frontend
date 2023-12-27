@@ -11,6 +11,15 @@ export const login=(values)=>{
   return userInstance.post("/login",{...values})
 }
 
+export const donationReqest=(values,userId)=>{
+  console.log(values,"$$$$$$$");
+  return userInstance.post("/donationreq",{...values,userId},{ headers: { "Content-Type": "multipart/form-data" } })
+}
+
+export const postSkill=(values,userId)=>{
+  return userInstance.post("/postskill",{values,userId},{ headers: { "Content-Type": "multipart/form-data" } })
+}
+
 //GET METHODS
 
 export const userHeader=()=>{
@@ -28,3 +37,4 @@ export const fetchTrainingDetails=()=>{
 export const fetchAcademicDetails=()=>{
   return userInstance.get("/fetechacademicdetails")
 }
+

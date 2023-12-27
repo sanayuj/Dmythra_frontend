@@ -5,6 +5,8 @@ import AdminHome from "../Pages/Admin/AdminHome";
 import TrainingPage from "../Pages/Admin/TrainingPage";
 import AcademicPage from "../Pages/Admin/AcademicPage";
 import AnnouncementPage from "../Pages/Admin/AnnouncementPage";
+import DonationRequestPage from "../Pages/Admin/DonationRequestPage";
+import UsersPostDisplayPage from "../Pages/Admin/UsersPostDisplayPage";
 
 
 
@@ -17,6 +19,8 @@ function AdminRouters() {
         <Route path="/training" element={<TrainingPage/>}/>
         <Route path="/academic" element={<AcademicPage/>}/>
         <Route path="/announcement" element={<AnnouncementPage/>}/>
+        <Route path="/donationreq" element={<DonationRequestPage/>}/>
+        <Route path="/userspost" element={<UsersPostDisplayPage/>}/>
       </Routes>
     </div>
   );

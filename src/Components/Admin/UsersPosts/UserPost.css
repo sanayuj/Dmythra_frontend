@@ -1,0 +1,26 @@
+.donationMain{
+    margin: 100px 10px 20px 90px;
+}
+.PostlistView{
+    margin-top: 30px;
+    width: 80%;
+    height: 200px;
+    background-color: rgb(244, 241, 237);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainList{
+    display: flex;
+   
+}
+.imageDiv{
+    margin-top: 30px;
+    display: flex;
+   width: 20%;
+   height: 200px;
+   background-color: beige;
+   border-radius: 10px;
+}
