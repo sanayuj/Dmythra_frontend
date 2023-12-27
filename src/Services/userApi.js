@@ -12,12 +12,11 @@ export const login=(values)=>{
 }
 
 export const donationReqest=(values,userId)=>{
-  console.log(values,"$$$$$$$");
   return userInstance.post("/donationreq",{...values,userId},{ headers: { "Content-Type": "multipart/form-data" } })
 }
 
 export const postSkill=(values,userId)=>{
-  return userInstance.post("/postskill",{values,userId},{ headers: { "Content-Type": "multipart/form-data" } })
+  return userInstance.post("/postskill",{...values,userId},{ headers: { "Content-Type": "multipart/form-data" } })
 }
 
 //GET METHODS

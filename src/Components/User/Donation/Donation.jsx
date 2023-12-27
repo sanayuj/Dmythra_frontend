@@ -4,16 +4,22 @@ import * as Yup from "yup";
 import "./Donation.css";
 import { donationReqest } from "../../../Services/userApi";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 function Donation() {
-    const [image,setImage]=useState("")
   const initialValues = {
     situation: "",
     description: "",
-    photo: null,
+    image: null,
   };
   const user = useSelector((state) => state.user.value);
-  const onSubmit = async (values) => {
+  const onSubmit = async (values,{ resetForm }) => {
     const { data } = await donationReqest(values, user?._id);
+    if(data.status){
+      toast.success(data.message)
+      resetForm()
+    }else{
+      toast.error("Unable to submit")
+    }
   };
   const validationSchema = Yup.object({
     situation: Yup.string()
@@ -22,16 +28,8 @@ function Donation() {
     description: Yup.string()
       .min(3, "*Name must be at least 3 characters long")
       .required("* This field is required"),
-    photo: Yup.mixed()
+      image: Yup.mixed()
       .test("fileSize", "File size is too large", (value) => {
-        // Assuming a maximum file size of 5 MB
-        if (value) return value.size <= 5 * 1024 * 1024;
-        return true;
-      })
-      .required("* This field is required"),
-    photo: Yup.mixed()
-      .test("fileSize", "File size is too large", (value) => {
-        // Assuming a maximum file size of 5 MB
         if (value) return value.size <= 5 * 1024 * 1024;
         return true;
       })
@@ -50,11 +48,6 @@ function Donation() {
     validationSchema,
   });
 
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    setImage("image", file);
-    formik.setFieldValue("image", file);
-  };
   return (
     <div>
       <div className="formbold-main-wrapper">
@@ -124,7 +117,7 @@ function Donation() {
             </div>
 
             <div className="formbold-mb-3">
-              <label for="photo" className="formbold-form-label">
+              <label for="image" className="formbold-form-label">
                 Proof
               </label>
               <input
@@ -134,13 +127,12 @@ function Donation() {
                 className="formbold-form-input"
                 onBlur={formik.handleBlur}
                 onChange={(event) => {
-                  formik.setFieldValue("photo", event.currentTarget.files[0]);
-                  handleImage(event);
-                  setImage(event.target.files[0]);
+                  formik.setFieldValue("image", event.target.files[0]);
+                  
                 }}
               />
 
-              {formik.touched.photo && formik.errors.photo ? (
+              {formik.touched.image && formik.errors.image ? (
                 <p
                   className="text-danger"
                   style={{
@@ -149,7 +141,7 @@ function Donation() {
                     padding: "0px",
                   }}
                 >
-                  {formik.errors.photo}
+                  {formik.errors.image}
                 </p>
               ) : null}
             </div>
