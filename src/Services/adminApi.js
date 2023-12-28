@@ -25,3 +25,11 @@ export const uploadAnnouncement=(values)=>{
 export const userDetails=()=>{
     return adminInstance.get("/userdetails")
   }
+
+  export const donationDetails=()=>{
+    return adminInstance.get("/donatondetails")
+  }
+
+  export const userPostDetails=()=>{
+    return adminInstance.get("/fetchuserpost")
+  }
