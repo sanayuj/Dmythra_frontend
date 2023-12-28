@@ -171,3 +171,9 @@ body {
     justify-content: center;
     color: rgb(157, 154, 154);
   }
+
+  .verified{
+background-color: #ece3e3;
+padding: 18px;
+border-radius: 5px;
+  }

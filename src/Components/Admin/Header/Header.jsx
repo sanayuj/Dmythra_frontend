@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Header.css"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 function Header() {
   const navigate=useNavigate()
   const handleAdminLogout=()=>{
@@ -10,7 +11,7 @@ function Header() {
   return (
     <div><nav class="navbar navbar-expand-lg bg-body-tertiary adminHeader">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><b>DMYTHRA</b><span className='adminlabel'> Admin</span></a>
+      <Link to={"/admin/home"} class="navbar-brand"><b>DMYTHRA</b><span className='adminlabel'> Admin</span></Link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

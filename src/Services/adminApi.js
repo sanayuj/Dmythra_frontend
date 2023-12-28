@@ -19,6 +19,10 @@ export const uploadAnnouncement=(values)=>{
     return adminInstance.post("/addannouncement",{...values})
 }
 
+export const verifyDonationApi=(donationId)=>{
+    return adminInstance.post(`/verfiydonation/${donationId}`)
+  }
+
 
 //GET
 

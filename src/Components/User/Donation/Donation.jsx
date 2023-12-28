@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./Donation.css";
-import { donationReqest } from "../../../Services/userApi";
+import { donationReqest, fetchApprovedUserDonation } from "../../../Services/userApi";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 function Donation() {
+  const [approvedDonation,setApprovedDonation]=useState([])
   const initialValues = {
     situation: "",
     description: "",
@@ -21,6 +22,18 @@ function Donation() {
       toast.error("Unable to submit")
     }
   };
+  const ApprovedDonation=async(userId)=>{
+const {data}=await fetchApprovedUserDonation(userId)
+if(data.status){
+  console.log(data,"****");
+setApprovedDonation(data.data)
+}
+
+  }
+
+  useEffect(()=>{
+    ApprovedDonation(user?._id)
+  },[user])
   const validationSchema = Yup.object({
     situation: Yup.string()
       .min(3, "*Name must be at least 3 characters long")
@@ -150,6 +163,10 @@ function Donation() {
               Submit
             </button>
           </form>
+          <h5 className="my-4">Approved Donation</h5>
+          {approvedDonation.map((value)=>(
+          <div className="verified">{value.requestTitle}</div>
+          ))}
         </div>
       </div>
     </div>

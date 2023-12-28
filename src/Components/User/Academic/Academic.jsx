@@ -72,7 +72,7 @@ function Academic() {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Training Video
+                  Academic Video
                 </h1>
                 <button
                   type="button"

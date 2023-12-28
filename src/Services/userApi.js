@@ -19,6 +19,8 @@ export const postSkill=(values,userId)=>{
   return userInstance.post("/postskill",{...values,userId},{ headers: { "Content-Type": "multipart/form-data" } })
 }
 
+
+
 //GET METHODS
 
 export const userHeader=()=>{
@@ -37,3 +39,6 @@ export const fetchAcademicDetails=()=>{
   return userInstance.get("/fetechacademicdetails")
 }
 
+export const fetchApprovedUserDonation=(userId)=>{
+  return userInstance.get(`/fetchApprovedDonation/${userId}`)
+}
