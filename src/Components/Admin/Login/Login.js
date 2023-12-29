@@ -15,6 +15,8 @@ function Login() {
   useEffect(() => {
     if (admin) {
       navigate("/admin/home");
+    }else{
+      navigate("/admin/")
     }
   }, [navigate, admin]); // Add any dependencies if needed
 
