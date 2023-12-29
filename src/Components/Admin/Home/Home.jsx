@@ -13,7 +13,6 @@ function Home() {
 
   const toggleBlock = async (userId,index) => {
     const { data } = await toogleBlock(userId);
-    console.log(data, "&&&&");
     setUserInfo((prevUsers) =>
           prevUsers.map((user, i) =>
             i === index ? { ...user, blockStatus: !user.blockStatus } : user

@@ -37,3 +37,7 @@ export const userDetails=()=>{
   export const userPostDetails=()=>{
     return adminInstance.get("/fetchuserpost")
   }
+
+  export const adminHeader=()=>{
+    return adminInstance.get("/")
+  }

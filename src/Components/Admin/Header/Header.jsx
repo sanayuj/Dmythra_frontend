@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Header.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { adminHeader } from '../../../Services/adminApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAdminDetails } from '../../../Features/setAdmin'
 
 function Header() {
+  const admin=useSelector((state)=>state.user.value)
+  const dispatch =useDispatch()
   const navigate=useNavigate()
   const handleAdminLogout=()=>{
    localStorage.removeItem("adminJWT")
    navigate("/admin/")
   }
+  useEffect(()=>{
+    adminHeader().then((response)=>{console.log();
+
+      dispatch(setAdminDetails(response.data))
+    })
+  },[])
   return (
     <div><nav class="navbar navbar-expand-lg bg-body-tertiary adminHeader">
     <div class="container-fluid">
@@ -18,7 +29,8 @@ function Header() {
       <div class="collapse navbar-collapse" id="navbarNav">
       </div>
     </div>
-    <div className='LogoutBtn' ><button onClick={handleAdminLogout}>Logout</button></div>
+    {admin && <div className='LogoutBtn'><button onClick={handleAdminLogout}>Logout</button></div>}
+   
   </nav>
   
   </div>

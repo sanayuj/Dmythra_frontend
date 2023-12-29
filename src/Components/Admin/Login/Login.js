@@ -1,49 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "./Login.css"
+import "./Login.css";
 import { adminLogin } from "../../../Services/adminApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setAdminDetails } from "../../../Features/setAdmin";
+
 function Login() {
-    const navigate=useNavigate()
-    const initialValues = {
-        email: "",
-        password: "",
-      };
-    
-      const validationSchema = Yup.object({
-        email: Yup.string()
-          .email("Invaild email address")
-          .required("* This field is required")
-          .matches(
-            /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
-            "Invalid email address"
-          ),
-        password: Yup.string().required("*This field is requires"),
-      });
-      const onSubmit = async (values) => {
-        try {
-          console.log(values,"555");
-         const {data}=await adminLogin(values)
-         console.log(data,"______******");
-         if(data.status){
-          localStorage.setItem("adminJWT", data.token);
-            toast.success(data.message)
-            navigate("/admin/home")
-         }else{
-            toast.error(data.message)
-         }
-        } catch (error) {
-            console.log(error)
-         
-      };
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const admin = useSelector((state) => state.admin.value);
+  useEffect(() => {
+   
+    if (admin) {
+      navigate("/admin/home");
     }
-      const formik = useFormik({
-        initialValues,
-        onSubmit,
-        validationSchema,
-      });
+  }, [navigate,admin]); // Add any dependencies if needed
+  
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invaild email address")
+      .required("* This field is required")
+      .matches(
+        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+        "Invalid email address"
+      ),
+    password: Yup.string().required("*This field is requires"),
+  });
+  const onSubmit = async (values) => {
+    try {
+      const { data } = await adminLogin(values);
+      if (data.status) {
+        localStorage.setItem("adminJWT", data.token);
+        toast.success(data.message);
+        dispatch(setAdminDetails(data.data));
+        navigate("/admin/home");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
+  
+
   return (
     <div class="main_div">
       <form class="form" onSubmit={formik.handleSubmit}>
@@ -99,8 +113,6 @@ function Login() {
         <button type="submit" class="btn btn-primary btn-block mb-4">
           Sign in
         </button>
-
-       
       </form>
     </div>
   );

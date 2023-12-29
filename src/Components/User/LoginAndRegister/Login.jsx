@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userSignup,login } from "../../../Services/userApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../../Features/setUser";
 
 function Login() {
   const dispatch=useDispatch()
   const navigate=useNavigate()
+  const user = useSelector((state) => state.user.value);
   const [isSignUp, setIsSignUp] = useState(false);
+
+useEffect(()=>{
+if(user){
+  navigate("/")
+}
+},[navigate,user])
 
   const toggleSignUp = () => {
     setIsSignUp(!isSignUp);
