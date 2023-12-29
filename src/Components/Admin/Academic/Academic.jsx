@@ -10,7 +10,7 @@ function Academic() {
     videoDescription: "",
     videoLink: "",
   };
-  const onSubmit = async(values,{resetForm}) => {
+  const onSubmit = async (values, { resetForm }) => {
     const { data } = await uploadAcademicDetails(values);
     if (data.status) {
       toast.success(data.message);

@@ -5,7 +5,7 @@ import Header from "../../Components/Admin/Header/Header";
 function AdminLoginPage() {
   return (
     <div>
-    <Header/>
+      <Header />
       <Login />
     </div>
   );

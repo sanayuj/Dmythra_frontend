@@ -13,18 +13,17 @@ function UserRouters() {
   return (
     <div>
       <Routes>
-        <Route path="/login" element={<LoginAndRegisterPage/>}/>
+        <Route path="/login" element={<LoginAndRegisterPage />} />
 
         <Route path="/" element={<HomePage />} />
-      <Route element={<UserUrlAuth/>}>
-        <Route path="/announcement" element={<AnnouncementPage/>}/>
-        <Route path="/post" element={<Postpage/>}/>
-        <Route path="/training" element={<TrainingPage/>}/>
-        <Route path="/academic" element={<AcademicPage/>}/>
-        <Route path="/donation" element={<DonationPage/>}/>
-       
-      </Route>
-      <Route path="/*" element={<NotFoundPage/>}/>
+        <Route element={<UserUrlAuth />}>
+          <Route path="/announcement" element={<AnnouncementPage />} />
+          <Route path="/post" element={<Postpage />} />
+          <Route path="/training" element={<TrainingPage />} />
+          <Route path="/academic" element={<AcademicPage />} />
+          <Route path="/donation" element={<DonationPage />} />
+        </Route>
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

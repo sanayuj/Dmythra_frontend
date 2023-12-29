@@ -9,17 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAdminDetails } from "../../../Features/setAdmin";
 
 function Login() {
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const admin = useSelector((state) => state.admin.value);
   useEffect(() => {
-   
     if (admin) {
       navigate("/admin/home");
     }
-  }, [navigate,admin]); // Add any dependencies if needed
-  
+  }, [navigate, admin]); // Add any dependencies if needed
+
   const initialValues = {
     email: "",
     password: "",
@@ -55,8 +53,6 @@ function Login() {
     onSubmit,
     validationSchema,
   });
-
-  
 
   return (
     <div class="main_div">

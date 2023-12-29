@@ -9,7 +9,6 @@ function Training() {
     videoName: "",
     videoDescription: "",
     videoLink: "",
-
   };
   const onSubmit = async (values, { resetForm }) => {
     const { data } = await uploadTrainingDetails(values);
@@ -42,8 +41,6 @@ function Training() {
       /^(https?:\/\/)?(www\.)?(youtube\.com\/(embed\/|v\/|watch\?v=)|youtu\.be\/)/;
     return youtubeRegex.test(value);
   };
-
- 
 
   const formik = useFormik({
     initialValues,

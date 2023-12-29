@@ -3,8 +3,6 @@ import "./Training.css";
 import YouTube from "react-youtube";
 import { fetchTrainingDetails } from "../../../Services/userApi";
 
-
-
 function Training() {
   const [trainingDetails, setTraining] = useState([]);
   const [selectedTraining, setSelectedTraining] = useState(null);
@@ -84,7 +82,11 @@ function Training() {
               ></button>
             </div>
             <div className="modal-body">
-              <YouTube videoId={selectedTraining} opts={opts} onReady={onReady} />
+              <YouTube
+                videoId={selectedTraining}
+                opts={opts}
+                onReady={onReady}
+              />
             </div>
           </div>
         </div>

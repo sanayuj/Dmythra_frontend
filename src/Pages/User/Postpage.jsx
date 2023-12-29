@@ -8,7 +8,6 @@ function Postpage() {
     <div>
       <Header />
       <PostSkill />
-   
     </div>
   );
 }

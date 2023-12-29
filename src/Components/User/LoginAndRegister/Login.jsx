@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { userSignup,login } from "../../../Services/userApi";
+import { userSignup, login } from "../../../Services/userApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../../Features/setUser";
 
 function Login() {
-  const dispatch=useDispatch()
-  const navigate=useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.value);
   const [isSignUp, setIsSignUp] = useState(false);
 
-useEffect(()=>{
-if(user){
-  navigate("/")
-}
-},[navigate,user])
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
 
   const toggleSignUp = () => {
     setIsSignUp(!isSignUp);
@@ -36,28 +36,28 @@ if(user){
     loginPassword: "",
   };
 
-  const signOnSubmit = async(values,{ resetForm }) => {
-    const {data}=await userSignup(values)
-    if(data.status){
-      toast.success(data.message)
+  const signOnSubmit = async (values, { resetForm }) => {
+    const { data } = await userSignup(values);
+    if (data.status) {
+      toast.success(data.message);
       resetForm({
         values: initialValuesOfSignup,
       });
-      navigate("/login")
-    }else{
-      toast.error(data.message)
+      navigate("/login");
+    } else {
+      toast.error(data.message);
     }
   };
 
-  const loginOnSubmit = async(values) => {
-    const {data}=await login(values)
-    if(data.success){
+  const loginOnSubmit = async (values) => {
+    const { data } = await login(values);
+    if (data.success) {
       localStorage.setItem("jwt", data.token);
-      toast.success(data.message)
-      dispatch(setUserDetails(data.userDetails))
-      navigate("/")
-    }else{
-      toast.error(data.message)
+      toast.success(data.message);
+      dispatch(setUserDetails(data.userDetails));
+      navigate("/");
+    } else {
+      toast.error(data.message);
     }
   };
 
@@ -69,7 +69,7 @@ if(user){
         /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
         "* Invalid email address"
       ),
-      loginPassword: Yup.string().required("* This field is required"),
+    loginPassword: Yup.string().required("* This field is required"),
   });
 
   const validationSchemaOfSignup = Yup.object({
@@ -104,13 +104,13 @@ if(user){
   });
   const formikLogin = useFormik({
     initialValues: initialValuesOfLogin,
-    onSubmit: loginOnSubmit,  // Use the loginOnSubmit function for login form
+    onSubmit: loginOnSubmit, // Use the loginOnSubmit function for login form
     validationSchema: validationSchemaOfLogin,
   });
-  
+
   const formikSignup = useFormik({
     initialValues: initialValuesOfSignup,
-    onSubmit: signOnSubmit,  // Use the signOnSubmit function for signup form
+    onSubmit: signOnSubmit, // Use the signOnSubmit function for signup form
     validationSchema: validationSchemaOfSignup,
   });
 
@@ -120,7 +120,9 @@ if(user){
       <br />
       <div className={`cont ${isSignUp ? "s--signup" : ""}`}>
         <div className="form sign-in">
-          <h2 className="my-3">Welcome to <b>Dmythra</b></h2>
+          <h2 className="my-3">
+            Welcome to <b>Dmythra</b>
+          </h2>
           <div className="loginForm">
             <form onSubmit={formikLogin.handleSubmit}>
               <label>
@@ -152,7 +154,8 @@ if(user){
                   onChange={formikLogin.handleChange}
                   value={formikLogin.values.loginPassword}
                 />
-                {formikLogin.touched.loginPassword && formikLogin.errors.loginPassword ? (
+                {formikLogin.touched.loginPassword &&
+                formikLogin.errors.loginPassword ? (
                   <p
                     className="text-danger"
                     style={{ fontSize: "12px", margin: "0px" }}
@@ -192,7 +195,8 @@ if(user){
                   onChange={formikSignup.handleChange}
                   value={formikSignup.values.username}
                 />
-                {formikSignup.touched.username && formikSignup.errors.username ? (
+                {formikSignup.touched.username &&
+                formikSignup.errors.username ? (
                   <p
                     className="text-danger"
                     style={{
@@ -236,7 +240,8 @@ if(user){
                   onChange={formikSignup.handleChange}
                   value={formikSignup.values.password}
                 />
-                {formikSignup.touched.password && formikSignup.errors.password ? (
+                {formikSignup.touched.password &&
+                formikSignup.errors.password ? (
                   <p
                     className="text-danger"
                     style={{
@@ -259,7 +264,7 @@ if(user){
                   value={formikSignup.values.confirmPassword}
                 />
                 {formikSignup.touched.confirmPassword &&
-                  formikSignup.errors.confirmPassword ? (
+                formikSignup.errors.confirmPassword ? (
                   <p
                     className="text-danger"
                     style={{

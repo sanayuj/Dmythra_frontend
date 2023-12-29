@@ -12,11 +12,11 @@ function PostSkill() {
     photo: null,
   };
   const user = useSelector((state) => state.user.value);
-  const onSubmit = async (values,{resetForm}) => {
+  const onSubmit = async (values, { resetForm }) => {
     const { data } = await postSkill(values, user?._id);
     if (data.status) {
       toast.success(data.message);
-      resetForm()
+      resetForm();
     } else {
       toast.error("Unable to submit!");
     }

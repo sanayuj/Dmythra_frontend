@@ -7,17 +7,16 @@ function Home() {
     const { data } = await userDetails();
     if (data.status) {
       setUserInfo(data.user);
-      
     }
   };
 
-  const toggleBlock = async (userId,index) => {
+  const toggleBlock = async (userId, index) => {
     const { data } = await toogleBlock(userId);
     setUserInfo((prevUsers) =>
-          prevUsers.map((user, i) =>
-            i === index ? { ...user, blockStatus: !user.blockStatus } : user
-          )
-        );
+      prevUsers.map((user, i) =>
+        i === index ? { ...user, blockStatus: !user.blockStatus } : user
+      )
+    );
   };
   useEffect(() => {
     fetchUserDetails();
@@ -42,11 +41,12 @@ function Home() {
               <td>{value.email}</td>
               <td>
                 <button
-                 
-                  className={value?.blockStatus ? "btn btn-primary" : "btn btn-secondary"}
-                  onClick={() => toggleBlock(value._id,index)}
+                  className={
+                    value?.blockStatus ? "btn btn-primary" : "btn btn-secondary"
+                  }
+                  onClick={() => toggleBlock(value._id, index)}
                 >
-                   {value?.blockStatus ? "Unblock" : "Block"}
+                  {value?.blockStatus ? "Unblock" : "Block"}
                 </button>
               </td>
             </tr>

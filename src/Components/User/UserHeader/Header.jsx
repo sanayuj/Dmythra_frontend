@@ -6,18 +6,18 @@ import { setUserDetails } from "../../../Features/setUser";
 import { userHeader } from "../../../Services/userApi";
 function Header() {
   const user = useSelector((state) => state.user.value);
-  const dispatch=useDispatch()
-  const navigate=useNavigate()
-  const handleLogout=()=>{
-    localStorage.removeItem("jwt")
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
     dispatch(setUserDetails(""));
     navigate("/login");
-  }
-  useEffect(()=>{
-    userHeader().then((response)=>{
+  };
+  useEffect(() => {
+    userHeader().then((response) => {
       dispatch(setUserDetails(response.data.userDetails));
-    })
-  },[])
+    });
+  }, []);
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark bg-body-tertiary ">
@@ -55,7 +55,7 @@ function Header() {
               </li>
               <li className="nav-item mx-3">
                 <Link className="nav-link" to="/academic">
-                  Academic 
+                  Academic
                 </Link>
               </li>
               <li className="nav-item mx-3">
@@ -73,9 +73,7 @@ function Header() {
         </div>
         {user ? (
           <div className="logoutBtn" onClick={handleLogout}>
-            <Link className="linkDecoration text-white" >
-              LogOut 
-            </Link>
+            <Link className="linkDecoration text-white">LogOut</Link>
           </div>
         ) : (
           <div className="logIn">

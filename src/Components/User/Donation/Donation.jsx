@@ -2,38 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./Donation.css";
-import { donationReqest, fetchApprovedUserDonation } from "../../../Services/userApi";
+import {
+  donationReqest,
+  fetchApprovedUserDonation,
+} from "../../../Services/userApi";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 function Donation() {
-  const [approvedDonation,setApprovedDonation]=useState([])
+  const [approvedDonation, setApprovedDonation] = useState([]);
   const initialValues = {
     situation: "",
     description: "",
     image: null,
   };
   const user = useSelector((state) => state.user.value);
-  const onSubmit = async (values,{ resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
     const { data } = await donationReqest(values, user?._id);
-    if(data.status){
-      toast.success(data.message)
-      resetForm()
-    }else{
-      toast.error("Unable to submit")
+    if (data.status) {
+      toast.success(data.message);
+      resetForm();
+    } else {
+      toast.error("Unable to submit");
     }
   };
-  const ApprovedDonation=async(userId)=>{
-const {data}=await fetchApprovedUserDonation(userId)
-if(data.status){
-  console.log(data,"****");
-setApprovedDonation(data.data)
-}
+  const ApprovedDonation = async (userId) => {
+    const { data } = await fetchApprovedUserDonation(userId);
+    if (data.status) {
+      console.log(data, "****");
+      setApprovedDonation(data.data);
+    }
+  };
 
-  }
-
-  useEffect(()=>{
-    ApprovedDonation(user?._id)
-  },[user])
+  useEffect(() => {
+    ApprovedDonation(user?._id);
+  }, [user]);
   const validationSchema = Yup.object({
     situation: Yup.string()
       .min(3, "*Name must be at least 3 characters long")
@@ -41,7 +43,7 @@ setApprovedDonation(data.data)
     description: Yup.string()
       .min(3, "*Name must be at least 3 characters long")
       .required("* This field is required"),
-      image: Yup.mixed()
+    image: Yup.mixed()
       .test("fileSize", "File size is too large", (value) => {
         if (value) return value.size <= 5 * 1024 * 1024;
         return true;
@@ -141,7 +143,6 @@ setApprovedDonation(data.data)
                 onBlur={formik.handleBlur}
                 onChange={(event) => {
                   formik.setFieldValue("image", event.target.files[0]);
-                  
                 }}
               />
 
@@ -164,8 +165,8 @@ setApprovedDonation(data.data)
             </button>
           </form>
           <h5 className="my-4">Approved Donation</h5>
-          {approvedDonation.map((value)=>(
-          <div className="verified">{value.requestTitle}</div>
+          {approvedDonation.map((value) => (
+            <div className="verified">{value.requestTitle}</div>
           ))}
         </div>
       </div>

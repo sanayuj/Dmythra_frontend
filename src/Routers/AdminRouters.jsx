@@ -10,24 +10,21 @@ import UsersPostDisplayPage from "../Pages/Admin/UsersPostDisplayPage";
 import AdminUrlAuth from "../Hooks/AdminUrlAuth";
 import NotFound from "../Components/Admin/NotFound/NotFound";
 
-
-
 function AdminRouters() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<AdminLoginPage/>}/>
-        <Route element={<AdminUrlAuth/>}>
-        <Route path="/home" element={<AdminHome/>}/>
-        <Route path="/training" element={<TrainingPage/>}/>
-        <Route path="/academic" element={<AcademicPage/>}/>
-        <Route path="/announcement" element={<AnnouncementPage/>}/>
-        <Route path="/donationreq" element={<DonationRequestPage/>}/>
-        <Route path="/userspost" element={<UsersPostDisplayPage/>}/>
+        <Route path="/" element={<AdminLoginPage />} />
+        <Route element={<AdminUrlAuth />}>
+          <Route path="/home" element={<AdminHome />} />
+          <Route path="/training" element={<TrainingPage />} />
+          <Route path="/academic" element={<AcademicPage />} />
+          <Route path="/announcement" element={<AnnouncementPage />} />
+          <Route path="/donationreq" element={<DonationRequestPage />} />
+          <Route path="/userspost" element={<UsersPostDisplayPage />} />
         </Route>
-        <Route path="/*" element={<NotFound/>}/>
-        </Routes>
-     
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
