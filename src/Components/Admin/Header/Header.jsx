@@ -6,20 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAdminDetails } from "../../../Features/setAdmin";
 
 function Header() {
-  const admin = useSelector((state) => state.user.value);
+  const admin = useSelector((state) => state.admin.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleAdminLogout = () => {
     localStorage.removeItem("adminJWT");
+    dispatch(setAdminDetails(""))
     navigate("/admin/");
   };
   useEffect(() => {
     adminHeader().then((response) => {
-      console.log();
-
-      dispatch(setAdminDetails(response.data));
+console.log(response,")))))");
+      dispatch(setAdminDetails(response.data.adminDetails));
+      
     });
-  }, []);
+  },[]);
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary adminHeader">
@@ -41,11 +42,11 @@ function Header() {
           </button>
           <div class="collapse navbar-collapse" id="navbarNav"></div>
         </div>
-        {admin && (
+        {admin ? (
           <div className="LogoutBtn">
             <button onClick={handleAdminLogout}>Logout</button>
           </div>
-        )}
+        ):(<div></div>)}
       </nav>
     </div>
   );
