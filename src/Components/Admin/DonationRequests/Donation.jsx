@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Donation.css";
 import { donationDetails, verifyDonationApi } from "../../../Services/adminApi";
 import { toast } from "react-toastify";
+
 function Donation() {
   const [donationData, setDonationData] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const fetchDonationDetails = async () => {
     const { data } = await donationDetails();
@@ -11,6 +13,7 @@ function Donation() {
       setDonationData(data?.data);
     }
   };
+
   const verifyDonation = async (donationId) => {
     const { data } = await verifyDonationApi(donationId);
     if (data.status) {
@@ -19,18 +22,32 @@ function Donation() {
       toast.error("Unable to verify");
     }
   };
+
   useEffect(() => {
     fetchDonationDetails();
   }, []);
+
+  const handleImageClick = (imageUrl) => {
+    console.log("Hehehe");
+    setSelectedImage(imageUrl);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className="donationMain">
       <h4>Donation requests</h4>
       {donationData.map((value) => (
-        <div className="mainDivClass">
+        <div className="mainDivClass" key={value._id}>
           <img
             className="image"
             src={`http://localhost:4000/images/${value.imageUrl}`}
             alt=""
+            onClick={() =>
+              handleImageClick(`http://localhost:4000/images/${value.imageUrl}`)
+            }
           />
           <div className="listView">
             <h4>{value.requestTitle}</h4>
@@ -56,6 +73,17 @@ function Donation() {
           </div>
         </div>
       ))}
+      {/* Display modal */}
+      {selectedImage && (
+        <div className="modal x" onClick={closeModal}>
+          <div className="modal-content y">
+            <span className="close z" onClick={closeModal}>
+              &times;
+            </span>
+            <img src={selectedImage} alt="Enlarged" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
