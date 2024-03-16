@@ -24,6 +24,7 @@ function UserRouters() {
           <Route path="/academic" element={<AcademicPage />} />
           <Route path="/donation" element={<DonationPage />} />
           <Route path="/post" element={<PostDisplayPage/>}/>
+          <Route path="/addPost" element={<Postpage/>}/>
         </Route>
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
